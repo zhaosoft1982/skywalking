@@ -18,10 +18,9 @@
 
 package org.apache.skywalking.apm.commons.datacarrier.buffer;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import org.apache.skywalking.apm.commons.datacarrier.callback.QueueBlockingCallback;
-import org.apache.skywalking.apm.commons.datacarrier.common.AtomicRangeInteger;
+import org.apache.skywalking.apm.commons.datacarrier.common.*;
 
 /**
  * Created by wusheng on 2016/10/25.
@@ -31,12 +30,14 @@ public class Buffer<T> {
     private BufferStrategy strategy;
     private AtomicRangeInteger index;
     private List<QueueBlockingCallback<T>> callbacks;
+    private FlexibleTime time;
 
     Buffer(int bufferSize, BufferStrategy strategy) {
         buffer = new Object[bufferSize];
         this.strategy = strategy;
         index = new AtomicRangeInteger(0, bufferSize);
         callbacks = new LinkedList<QueueBlockingCallback<T>>();
+        time = new FlexibleTime();
     }
 
     void setStrategy(BufferStrategy strategy) {
@@ -61,10 +62,12 @@ public class Buffer<T> {
                             }
                         }
                         try {
-                            Thread.sleep(1L);
+                            Thread.sleep(time.value());
                         } catch (InterruptedException e) {
                         }
+                        time.triedOnce();
                     }
+                    time.success();
                     break;
                 case IF_POSSIBLE:
                     return false;
