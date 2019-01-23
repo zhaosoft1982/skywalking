@@ -27,7 +27,7 @@ public class FlexibleTimeTest {
      */
     @Test
     public void testSleepTimeCalculation() {
-        FlexibleTime time = new FlexibleTime();
+        FlexibleTime time = new FlexibleTime(512);
         Assert.assertEquals(1, time.value());
         Whitebox.setInternalState(time, "counter", 5); // 1 << 9
         Assert.assertEquals(1, time.value());

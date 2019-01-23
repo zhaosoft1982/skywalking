@@ -31,10 +31,11 @@ public class FlexibleTime {
     private final int[] buckets;
     private volatile int counter = 0;
     private int counterMax;
-    private final int factor = 9;
+    private final int factor;
 
-    public FlexibleTime() {
+    public FlexibleTime(int size) {
         buckets = DEFAULT;
+        factor = Double.valueOf(Math.log(size) / Math.log(2)).intValue() + 2;
         counterMax = buckets.length << factor;
     }
 

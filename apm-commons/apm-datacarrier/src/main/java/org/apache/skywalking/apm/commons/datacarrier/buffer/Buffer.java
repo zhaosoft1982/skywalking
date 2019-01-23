@@ -37,7 +37,7 @@ public class Buffer<T> {
         this.strategy = strategy;
         index = new AtomicRangeInteger(0, bufferSize);
         callbacks = new LinkedList<QueueBlockingCallback<T>>();
-        time = new FlexibleTime();
+        time = new FlexibleTime(bufferSize);
     }
 
     void setStrategy(BufferStrategy strategy) {
