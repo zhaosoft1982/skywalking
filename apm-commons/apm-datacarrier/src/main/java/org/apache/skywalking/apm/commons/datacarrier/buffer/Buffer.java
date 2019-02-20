@@ -83,6 +83,10 @@ public class Buffer<T> {
         return buffer.length;
     }
 
+    public LinkedList<T> obtain() {
+        return this.obtain(0, buffer.length);
+    }
+
     public LinkedList<T> obtain(int start, int end) {
         LinkedList<T> result = new LinkedList<T>();
         for (int i = start; i < end; i++) {

@@ -55,6 +55,9 @@ H2:
 Component-Server-Mappings:
   Jedis: Redis
   StackExchange.Redis: Redis
+  Redisson: Redis
+  Lettuce: Redis
+  Zookeeper: Zookeeper
   SqlClient: SqlServer
   Npgsql: PostgreSQL
   MySqlConnector: Mysql
