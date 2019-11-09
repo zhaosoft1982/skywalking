@@ -68,6 +68,7 @@ public class SkyWalkingAgent {
     public static void premain(String agentArgs, Instrumentation instrumentation) throws PluginException, IOException {
         final PluginFinder pluginFinder;
         try {
+            //初始化agent参数
             SnifferConfigInitializer.initialize(agentArgs);
 
             pluginFinder = new PluginFinder(new PluginBootstrap().loadPlugins());
